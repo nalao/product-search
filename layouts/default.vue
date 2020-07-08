@@ -1,6 +1,12 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+    >
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -49,15 +55,10 @@ export default {
         },
         {
           icon: "mdi-application",
-          title: "Add Product",
+          title: "Product",
           to: {
             name: "product"
           }
-        },
-        {
-          icon: "mdi-logout",
-          title: "Logout",
-          to: ""
         }
       ],
       miniVariant: false,

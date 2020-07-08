@@ -22,16 +22,24 @@ export default {
   head: {
     titleTemplate: "%s - " + process.env.npm_package_name,
     title: process.env.npm_package_name || "",
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+    meta: [{
+        charset: "utf-8"
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1"
+      },
       {
         hid: "description",
         name: "description",
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/favicon.ico"
+    }]
   },
   /*
    ** Global CSS
@@ -41,7 +49,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~plugins/filters.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -56,39 +64,8 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxtjs/auth"
+    "@nuxtjs/axios"
   ],
-  auth: {
-    redirect: {
-      login: "/login"
-    },
-    strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: "https://sakko-demo-api.herokuapp.com/api/v1/user/sign_in",
-            method: "post",
-            propertyName: "user.auth_jwt"
-          },
-          logout: {
-            url: "https://sakko-demo-api.herokuapp.com/api/v1/user/sign_out",
-            method: "delete"
-          },
-          user: {
-            url: "https://sakko-demo-api.herokuapp.com/api/v1/user/me",
-            method: "get",
-            propertyName: "user"
-          }
-        },
-        tokenName: "auth-token"
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
-      }
-    }
-  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
