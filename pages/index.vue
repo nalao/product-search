@@ -11,7 +11,7 @@
             label="ປ້ອນລະຫັດ ເພື່ອຄົ້ນຫາ"
             @keyup.enter="search"
           ></v-text-field>
-          <v-btn class="ma-2" color="secondary" @click="search">ຄົ້ນຫາ</v-btn>
+          <v-btn class="ma-2" color="primary" @click="search">ຄົ້ນຫາ</v-btn>
         </v-card-title>
         <v-card-text>
           <v-alert type="error" v-if="warning">
@@ -45,7 +45,7 @@
 
 <script>
 import axios from "axios";
-
+import * as ProductApi from "~/utils/product-api";
 export default {
   data() {
     return {
@@ -59,20 +59,12 @@ export default {
     async search() {
       this.loading = "overlay";
       this.warning = false;
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/get-by-id/" + this.pro_id
-        );
-        if (response.data.length == 0) {
-          this.warning = true;
-        }
-        console.log(response);
-        this.items = response.data;
-        this.loading = false;
-      } catch (error) {
+      const response = await ProductApi.show(this.pro_id);
+      this.items = response.data;
+      this.loading = false;
+      console.log("response", response);
+      if (response.data.length == 0) {
         this.warning = true;
-        this.loading = false;
-        console.error(error);
       }
     }
   }

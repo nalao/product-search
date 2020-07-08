@@ -1,25 +1,35 @@
 <template>
   <div>
-    Product !!! required login
-    <v-btn to="product/new">New Product</v-btn>
-    <v-card class="mx-auto" max-width="344" v-for="product in products" :key="product.id">
-      <v-card-text>
-        <p class="display-1 text--primary">{{product.title}}</p>
-        <div class="text--primary">Product id {{product.id}}</div>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text color="deep-purple accent-4" :to="`product/${product.id}`">Learn More</v-btn>
-      </v-card-actions>
-    </v-card>
+    <v-card-title>
+      <v-btn to="product/new" color="primary">New Product</v-btn>
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="products"
+      :search="search"
+    ></v-data-table>
   </div>
 </template>
 
 <script>
 import * as ProductApi from "~/utils/product-api";
 export default {
-  middleware: "auth",
   data() {
     return {
+      search: "",
+      headers: [
+        { text: "PRODUCT ID", value: "pro_id" },
+        { text: "NAME", value: "name" },
+        { text: "PRICE", value: "price" }
+      ],
       products: []
     };
   },
@@ -31,5 +41,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,26 +1,26 @@
-import { request } from "./api";
+import {
+  request
+} from "./api";
 
-const HOSTNAME = "https://sakko-demo-api.herokuapp.com";
+const HOSTNAME = "http://localhost:3000";
 export function index() {
-  const url = `${HOSTNAME}/api/v1/user/blogs`;
+  const url = `${HOSTNAME}/api/all`;
   return request("get", url, {}, true);
 }
 
 export function show(id) {
-  const url = `${HOSTNAME}/api/v1/user/blogs/${id}`;
+  const url = `${HOSTNAME}/api/get-by-id/${id}`;
   return request("get", url, {}, true);
 }
 
-export function create(title, body) {
-  const url = `${HOSTNAME}/api/v1/user/blogs`;
+export function create(pro_id, name, price) {
+  const url = `${HOSTNAME}/api/add`;
   return request(
     "post",
-    url,
-    {
-      blog: {
-        title,
-        body
-      }
+    url, {
+      pro_id,
+      name,
+      price
     },
     true
   );
@@ -30,8 +30,7 @@ export function update(id, title, body) {
   const url = `${HOSTNAME}/api/v1/user/blogs/${id}`;
   return request(
     "put",
-    url,
-    {
+    url, {
       blog: {
         title,
         body
