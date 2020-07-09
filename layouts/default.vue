@@ -55,7 +55,7 @@ export default {
         },
         {
           icon: "mdi-application",
-          title: "Product",
+          title: "Manage Product",
           to: {
             name: "product"
           }

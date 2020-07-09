@@ -1,6 +1,4 @@
-import {
-  request
-} from "./api";
+import { request } from "./api";
 
 const HOSTNAME = "http://localhost:3000";
 export function index() {
@@ -13,34 +11,54 @@ export function show(id) {
   return request("get", url, {}, true);
 }
 
-export function create(pro_id, name, price) {
+export function create(pro_id, name, price, price_send, qty, ccy) {
   const url = `${HOSTNAME}/api/add`;
   return request(
     "post",
-    url, {
+    url,
+    {
       pro_id,
       name,
-      price
+      price,
+      price_send,
+      qty,
+      ccy
     },
     true
   );
 }
 
-export function update(id, title, body) {
-  const url = `${HOSTNAME}/api/v1/user/blogs/${id}`;
+export function update(pro_id, name, price, price_send, qty, ccy) {
+  const url = `${HOSTNAME}/api/edit`;
   return request(
     "put",
-    url, {
-      blog: {
-        title,
-        body
-      }
+    url,
+    {
+      pro_id,
+      name,
+      price,
+      price_send,
+      qty,
+      ccy
+    },
+    true
+  );
+}
+
+export function sale(pro_id, qty) {
+  const url = `${HOSTNAME}/api/sale`;
+  return request(
+    "put",
+    url,
+    {
+      pro_id,
+      qty
     },
     true
   );
 }
 
 export function destroy(id) {
-  const url = `${HOSTNAME}/api/v1/user/blogs/${id}`;
+  const url = `${HOSTNAME}/api/delete/${id}`;
   return request("delete", url, {}, true);
 }
