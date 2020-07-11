@@ -7,37 +7,20 @@
       <v-snackbar v-model="snackbar" top="top" :color="color">
         {{ text }}
         <template v-slot:action="{ attrs }">
-          <v-btn color="white" text v-bind="attrs" @click="snackbar = false"
-            >Close</v-btn
-          >
+          <v-btn color="white" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
         </template>
       </v-snackbar>
       <v-col cols="12" sm="10" md="8" lg="6">
         <v-card>
           <v-card-title>{{ title }}</v-card-title>
           <v-card-text>
-            <v-text-field
-              v-model="pro_id"
-              label="ລະຫັດສິນຄ້າ"
-              v-if="handleMangeClicked"
-            ></v-text-field>
-            <v-text-field
-              v-model="pro_id"
-              label="ລະຫັດສິນຄ້າ"
-              v-if="!handleMangeClicked"
-              disabled
-            ></v-text-field>
+            <v-text-field v-model="pro_id" label="ລະຫັດສິນຄ້າ" v-if="handleMangeClicked"></v-text-field>
+            <v-text-field v-model="pro_id" label="ລະຫັດສິນຄ້າ" v-if="!handleMangeClicked" disabled></v-text-field>
             <v-text-field v-model="name" label="ຊື່"></v-text-field>
             <v-text-field v-model="price" label="ລາຄາຍ່ອຍ"></v-text-field>
             <v-text-field v-model="price_send" label="ລາຄາສົ່ງ"></v-text-field>
             <v-text-field v-model="qty" label="ຈຳນວນສິນຄ້າ"></v-text-field>
-            <v-select
-              v-model="ccy"
-              :items="items"
-              item-text="text"
-              item-value="value"
-              label=" CCY"
-            ></v-select>
+            <v-select v-model="ccy" :items="items" item-text="text" item-value="value" label=" CCY"></v-select>
           </v-card-text>
           <v-card-actions>
             <v-btn
@@ -45,15 +28,13 @@
               color="primary"
               @click="handleCreateClicked"
               v-if="handleMangeClicked"
-              >SAVE</v-btn
-            >
+            >SAVE</v-btn>
             <v-btn
               outlined
               color="primary"
               @click="handleUpdateClicked"
               v-if="!handleMangeClicked"
-              >EDIT</v-btn
-            >
+            >EDIT</v-btn>
             <v-spacer></v-spacer>
             <v-btn outlined color="warning" @click="resetForm">Reset</v-btn>
           </v-card-actions>
@@ -70,22 +51,14 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table :headers="headers" :items="products" :search="search">
-      <template v-slot:item.price="{ item }"
-        >{{ item.price | formatNumber }} {{ item.ccy }}</template
-      >
-      <template v-slot:item.price_send="{ item }"
-        >{{ item.price | formatNumber }} {{ item.ccy }}</template
-      >
+      <template v-slot:item.price="{ item }">{{ item.price | formatNumber }} {{ item.ccy }}</template>
+      <template v-slot:item.price_send="{ item }">{{ item.price | formatNumber }} {{ item.ccy }}</template>
       <template v-slot:item.qty="{ item }">
         <v-chip :color="getColor(item.qty)" dark>{{ item.qty }}</v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-        <v-icon small @click="deleteItem(item)">
-          mdi-delete
-        </v-icon>
+        <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+        <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialData">Reload</v-btn>
