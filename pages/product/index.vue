@@ -52,7 +52,7 @@
     </v-card-title>
     <v-data-table :headers="headers" :items="products" :search="search">
       <template v-slot:item.price="{ item }">{{ item.price | formatNumber }} {{ item.ccy }}</template>
-      <template v-slot:item.price_send="{ item }">{{ item.price | formatNumber }} {{ item.ccy }}</template>
+      <template v-slot:item.price_send="{ item }">{{ item.price_send | formatNumber }} {{ item.ccy }}</template>
       <template v-slot:item.qty="{ item }">
         <v-chip :color="getColor(item.qty)" dark>{{ item.qty }}</v-chip>
       </template>
